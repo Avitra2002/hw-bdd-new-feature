@@ -9,6 +9,8 @@ module NavigationHelpers
   #   When /^I go to (.+)$/ do |page_name|
   #
   # step definition in web_steps.rb
+  
+
   #
   def path_to(page_name)
     case page_name
@@ -20,6 +22,13 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    when /^the Similar Movies page for "(.+)"$/i
+      movie_title = $1
+      movie_similar_movie_path(Movie.find_by(title: movie_title)) 
+
+    when /^the details page for "(.+)"$/i
+      movie = Movie.find_by(title: $1)
+      movie_path(movie)
 
     else
       begin

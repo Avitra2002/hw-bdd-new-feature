@@ -1,0 +1,12 @@
+<!-- In app/views/movies/similar.html.erb -->
+<% if @similar_movies.present? %>
+  <h1>Movies With Similar Director</h1>
+
+  <ul>
+    <% @similar_movies.each do |movie| %>
+      <li><%= link_to movie.title, movie_path(movie) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No other movies found by <%= @movie.director %>.</p>
+<% end %>

@@ -23,3 +23,29 @@ Then /I should see all the movies/ do
     step %{I should see "#{movie.title}"}
   end
 end
+
+When /^I follow to the edit page for "([^"]+)"$/ do |title|
+  movie = Movie.find_by(title: title)
+  visit edit_movie_path(movie)
+end
+
+# When /^I fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+#   fill_in(field, with: value) #form field
+# end
+
+# When /^I press "(.*)"$/ do |button_name|
+#   click_button(button_name)
+# end
+
+Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |movie_title, director_name|
+  movie = Movie.find_by(title: movie_title)
+  if movie
+    movie.update(director: director_name)
+  else
+    raise "Movie with title '#{movie_title}' not found"
+  end
+  expect(movie.director).to eq(director_name)
+end
+
+
+
